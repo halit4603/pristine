@@ -1,0 +1,37 @@
+{
+  "name": "pristine",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "test": "jest"
+  },
+  "dependencies": {
+    "axios": "^0.17.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "date-fns": "^1.29.0",
+    "eslint-config-rallycoding": "^3.2.0",
+    "lodash": "^4.17.4",
+    "prop-types": "^15.6.0",
+    "react": "16.0.0",
+    "react-native": "0.51.0",
+    "react-native-elements": "^0.18.5",
+    "react-native-render-html": "https://github.com/chadmorrow/react-native-render-html",
+    "react-native-swiper": "^1.5.13",
+    "react-native-vector-icons": "^4.4.2",
+    "react-navigation": "^1.0.0-beta.21",
+    "react-redux": "^5.0.6",
+    "redux": "^3.7.2",
+    "redux-devtools-extension": "^2.13.2",
+    "redux-logger": "^3.0.6"
+  },
+  "devDependencies": {
+    "babel-jest": "22.0.0",
+    "babel-preset-react-native": "4.0.0",
+    "jest": "22.0.0",
+    "react-test-renderer": "16.0.0"
+  },
+  "jest": {
+    "preset": "react-native"
+  }
+}
