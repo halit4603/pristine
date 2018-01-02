@@ -11,7 +11,7 @@ import dfns from 'date-fns';
 import { Text, Card, Icon, Divider } from 'react-native-elements';
 import { connect } from 'react-redux';
 import _ from 'lodash';
-import { misreadArticle } from '../actions/articleActions';
+import { misreadArticle, readArticle } from '../actions/articleActions';
 
 class Stream extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -77,9 +77,12 @@ class Stream extends Component {
           renderItem={({ item }) => (
             <TouchableNativeFeedback
               onPress={() => {
-                this.props.goToArticle(item);
+                this.props.subscriptions[this.props.activeStream].partial &&
+                this.props.subscriptions[this.props.activeStream].partial === true
+                  ? this.props.goToMisreadArticle(item)
+                  : this.props.goToArticle(item);
                 return this.props.navigation.navigate('Article', {
-                  title: this.props.streamContent.title
+                  title: this.props.subscriptions[this.props.activeStream].title
                 });
               }}
             >
@@ -219,7 +222,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    goToArticle: item => dispatch(misreadArticle(item))
+    goToMisreadArticle: item => dispatch(misreadArticle(item)),
+    goToArticle: item => dispatch(readArticle(item))
   };
 };
 

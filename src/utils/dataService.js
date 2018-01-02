@@ -9,7 +9,6 @@ const dataService = ({ dispatch }) => next => action => {
   if (action.payload.load) {
     dispatch({ type: LOADING });
   }
-  console.log(action);
   const { payload } = action;
 
   axios(payload.request)

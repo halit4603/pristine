@@ -13,8 +13,6 @@ import com.facebook.react.bridge.ReactMethod;
 import java.util.List;
 import java.util.Map;
 
-import okhttp3.Response;
-
 public class CruxModule extends ReactContextBaseJavaModule {
   public CruxModule(ReactApplicationContext reactContext) {
     super(reactContext);

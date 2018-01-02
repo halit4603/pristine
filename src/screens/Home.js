@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { ActivityIndicator, SectionList, View, StyleSheet } from 'react-native';
-import { Text, ListItem } from 'react-native-elements';
+import { Text, ListItem, Avatar } from 'react-native-elements';
 import _ from 'lodash';
 import dfns from 'date-fns';
 import { connect } from 'react-redux';
@@ -73,6 +73,9 @@ class Home extends Component {
           }}
           renderItem={({ item }) => (
             <ListItem
+              roundAvatar
+              avatar={item.visualUrl ? item.visualUrl : null}
+              // avatarStyle={{ marginHorizontal: 40 }}
               titleContainerStyle={{ width: '70%' }}
               titleNumberOfLines={2}
               containerStyle={{

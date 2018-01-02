@@ -1,7 +1,6 @@
-import { MISREAD_ARTICLE, APICALL } from './types';
+import { MISREAD_ARTICLE, READ_SUCCESS, APICALL } from './types';
 
 export function misreadArticle(article) {
-  console.log(article.alternate[0].href);
   return {
     type: APICALL,
     payload: {
@@ -15,5 +14,12 @@ export function misreadArticle(article) {
         }
       }
     }
+  };
+}
+
+export function readArticle(article) {
+  return {
+    type: READ_SUCCESS,
+    payload: article
   };
 }
