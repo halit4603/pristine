@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ActivityIndicator, SectionList, View, StyleSheet } from 'react-native';
+import { ActivityIndicator, SectionList, View, StyleSheet, Dimensions } from 'react-native';
 import { Text, ListItem, Avatar } from 'react-native-elements';
 import _ from 'lodash';
 import dfns from 'date-fns';

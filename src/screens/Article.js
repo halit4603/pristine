@@ -6,7 +6,8 @@ import {
   Dimensions,
   StyleSheet,
   Linking,
-  ActivityIndicator
+  ActivityIndicator,
+  FlatList
 } from 'react-native';
 import { connect } from 'react-redux';
 import HTML from 'react-native-render-html';
@@ -20,32 +21,33 @@ class Article extends Component {
     if (this.props.loading) {
       return <ActivityIndicator style={{ paddingTop: 16 }} color={'hotpink'} size={64} />;
     }
-    console.log(this.props);
     return (
       <View style={styles.wrapper}>
         <ScrollView contentContainerStyle={styles.article}>
-          <View style={styles.article}>
-            <Text
-              style={{
-                fontSize: 24,
-                fontWeight: 'bold'
+          <FlatList horizontal pagingEnabled>
+            <View style={styles.article}>
+              <Text
+                style={{
+                  fontSize: 24,
+                  fontWeight: 'bold'
+                }}
+              >
+                {this.props.article.title}
+              </Text>
+            </View>
+            <HTML
+              html={
+                this.props.article.misreadContent ||
+                (this.props.article.content && this.props.article.content.content) ||
+                (this.props.article.summary && this.props.article.summary.content)
+              }
+              baseFontStyle={{ fontSize: 18, lineHeight: 28 }}
+              imagesMaxWidth={Dimensions.get('window').width - 16}
+              onLinkPress={(evt, href) => {
+                Linking.openURL(href);
               }}
-            >
-              {this.props.article.title}
-            </Text>
-          </View>
-          <HTML
-            html={
-              this.props.article.misreadContent ||
-              (this.props.article.content && this.props.article.content.content) ||
-              (this.props.article.summary && this.props.article.summary.content)
-            }
-            baseFontStyle={{ fontSize: 18, lineHeight: 28 }}
-            imagesMaxWidth={Dimensions.get('window').width - 16}
-            onLinkPress={(evt, href) => {
-              Linking.openURL(href);
-            }}
-          />
+            />
+          </FlatList>
         </ScrollView>
       </View>
     );

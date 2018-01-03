@@ -6,6 +6,7 @@ import {
   FETCH_COUNTS_SUCCESS,
   MISREAD_SUCCESS
 } from '../actions/types';
+import { insertByIndex } from '../utils/helpers';
 
 export function subsError(state = false, action) {
   switch (action.type) {
@@ -33,16 +34,12 @@ export function subscriptions(state = {}, action) {
       });
       return newSubsData;
     case FETCH_STREAM_SUCCESS:
-      const streamMap = action.payload.data.items.reduce((map, article) => {
-        map[article.id] = article;
-        return map;
-      }, {});
       return {
         ...state,
         [action.payload.data.id]: {
           ...state[action.payload.data.id],
           ...{
-            stream: streamMap,
+            stream: [...action.payload.data.items],
             streamUpdated: action.payload.data.updated,
             streamContinuation: action.payload.data.continuation
           }
@@ -53,15 +50,12 @@ export function subscriptions(state = {}, action) {
         ...state,
         [action.payload.origin.streamId]: {
           ...state[action.payload.origin.streamId],
-          stream: {
-            ...state[action.payload.origin.streamId].stream,
-            [action.payload.id]: {
-              ...state[action.payload.origin.streamId].stream[action.payload.id],
-              ...{
-                misreadContent: action.payload.data
-              }
-            }
-          }
+          stream: state[action.payload.origin.streamId].stream.map(
+            item =>
+              item.id === action.payload.id
+                ? { ...item, misreadContent: action.payload.data }
+                : item
+          )
         }
       };
     default:

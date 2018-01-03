@@ -5,7 +5,8 @@ import {
   View,
   StyleSheet,
   Share,
-  TouchableNativeFeedback
+  TouchableNativeFeedback,
+  Dimensions
 } from 'react-native';
 import dfns from 'date-fns';
 import { Text, Card, Icon, Divider } from 'react-native-elements';
@@ -77,13 +78,18 @@ class Stream extends Component {
           renderItem={({ item }) => (
             <TouchableNativeFeedback
               onPress={() => {
-                this.props.subscriptions[this.props.activeStream].partial &&
-                this.props.subscriptions[this.props.activeStream].partial === true
-                  ? this.props.goToMisreadArticle(item)
-                  : this.props.goToArticle(item);
-                return this.props.navigation.navigate('Article', {
-                  title: this.props.subscriptions[this.props.activeStream].title
-                });
+                console.log(
+                  this.props.subscriptions[this.props.activeStream].stream.findIndex(
+                    item => item.id === this.props
+                  )
+                );
+                // this.props.subscriptions[this.props.activeStream].partial &&
+                // this.props.subscriptions[this.props.activeStream].partial === true
+                //   ? this.props.goToMisreadArticle(item)
+                //   : this.props.goToArticle(item);
+                // return this.props.navigation.navigate('Article', {
+                //   title: this.props.subscriptions[this.props.activeStream].title
+                // });
               }}
             >
               <View>
@@ -91,7 +97,7 @@ class Stream extends Component {
                   image={
                     item.visual && item.visual.url !== undefined ? { uri: item.visual.url } : null
                   }
-                  //imageWrapperStyle={{ marginTop: 0 }}
+                  imageStyle={Dimensions.get('window').width > 375 ? { height: 315 } : 100}
                   titleNumberOfLines={2}
                   containerStyle={{
                     backgroundColor: 'white',
