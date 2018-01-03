@@ -1,4 +1,3 @@
-import { orderBy } from 'lodash';
 import {
   FETCH_SUBS_ERROR,
   FETCH_SUBS_SUCCESS,
@@ -6,7 +5,6 @@ import {
   FETCH_COUNTS_SUCCESS,
   MISREAD_SUCCESS
 } from '../actions/types';
-import { insertByIndex } from '../utils/helpers';
 
 export function subsError(state = false, action) {
   switch (action.type) {
